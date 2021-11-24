@@ -3,17 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Asap:wght@500&family=Padauk&display=swap" rel="stylesheet">
     </head>
     <body>
-        {% block body %}{% endblock %}
+    {% include "partials/header.html.twig" %}
+        {% block body %}
+        
+        {% endblock %}
+         {% include "partials/footer.html.twig" %}
+        {% block javascripts %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+             {% if controller_name is defined  and controller_name  == 'HomeController' %}
+        <script src="javascript/menuColor.js"></script>
+        {% endif %}
+        {% endblock %}
     </body>
 </html>

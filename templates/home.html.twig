@@ -1,7 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MyCar.be{% endblock %}
-
+{% block title %}MonGarage.be {% endblock %}
 {% block body %}
+<div class="container-fluid p-0 position-relative firstCont">
+     <div class="downHome position-absolute"><a href="#info"><i class="fas fa-arrow-circle-down"></i></a></div>
+<video class="w-100 position-relative vidBot" autoplay loop muted>
+.
+    <source src="/videos/car.mp4"
+            type="video/webm">
+    <source src="/videos/car.mp4"
+            type="video/mp4">
+
+    Sorry, your browser doesn't support embedded videos.
+</video>
+    </div>
+    <div id="info" class="container h-auto">
+    <h1 class="homeH display-3 text-center  text-black">Bienvenu sur Mon Garage.be</h1>
+        <div class="jumbotron mt-3">
+            <p class="lead">Ce site a pour objectif de vous présenter MonGarage.be. Vous y découvrirez notre savoir-faire, nos véhicules et vous pourrez obtenir plus d'informations sur nous et nous contacter. Nous sommes basés en Belgique, à Mons, situé à 1h de Bruxelles. </p>
+<p class="lead">
+Le garage Mon Garage.be, une histoire qui débuta par la passion de l'automobile.
+Vous pouvez parcourir le site  MonGarage.be à l'aide des liens de navigations dans le menu, afin de trouver plus facilement votre véhicule.</p>
+<p class="lead">
+Nous vous souhaitons une bonne visite sur notre site et, nous espérons que vous trouverez le véhicule que vous cherchiez, au cas échéant contacté nous afin de vous aider dans votre recherche.</p>
+        </div>
+    <section class="carsChoice mt-5 pb-5">
+    <h2 class="text-center mb-4">Un large choix de véhicules</h2>
+    <div class="d-flex justify-content-center w-100">
+    <img src="images/carHome.png" alt="voiture de marque">
+    </div>
+    <p class="lead text-center">
+    Découvrez notre large choix de véhicule de seconde main et laissez vous tenter par nos services de qualité.
+    </p>
+     <a href="#" class="btn btn-light shadow d-block m-0 m-auto w-50 btnVehicle">Découvrir nos modèles</a>
+    </section>
+
+    </div>
 
 {% endblock %}

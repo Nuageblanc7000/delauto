@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid p-0 m-0 ">
+  <div class="col-12 carrouselShowCar shadow-lg ">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+      {#création de ma boucle pour afficher mes images #}
+      {% for img in car.images %}
+
+        {# on donne une condition pour que seul la première image reçoit la classe active #}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+        <img src="{{img.nameImg}}" class="d-block w-100" alt="{{img.caption}}">
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+  
+  <div class="viewInfo d-flex justify-content-around align-items-center shadow"> 
+    <div class="container d-flex justify-content-around align-items-center">
+      <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
+      <p>{{car.price |format_currency('EUR', locale='fr')}}
+        <button class="d-block btn btn-light shadow">Réserver</button>
+      </p>
+    </div>
+  </div>
+  <div class="viewInfo infoCars w-100 d-flex shadow h-auto"> 
+    <div class="container-fluid  w-100">
+      <div class="row justify-content-center">
+        <div class=" col-12 col-sm-6 col-lg-4 col-xl-3 mt-3">
+          <p>Première immatriculation:  <span>{{car.yearOfEntry | date("d/m/Y")}}</span></p>
+          <p>Kilométrage:  <span>{{car.km}} km</span></p>
+          <p>Nombre(s) de propriétaires(s):<span>{{car.NumberOwners}}</span></p>
+        </div>
+        <div class="col-12 col-sm-4 col-lg-3 col-xl-3 mt-3">
+          <p>Cylindrée:  <span>{{car.engineSize}} CC</span></p>
+          <p>Puissance:  <span>{{car.powerEngine}} CH</span></p>
+          <p>Transmission:  <span>{{car.Transmission}}</span></p>
+          <p>Carburant: <span>{{car.fuel}}</span></p>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="descr container shadow mt-2">
+  <h2 class="">Description:</h2>
+    <p>{{car.description}}</p>
+  </div>
+
+  <div class="descr container shadow mt-2">
+  <h2 class="">Options:</h2>
+    <p>{{car.options}}</p>
+  </div>
+
+</div>
+
+{% endblock %}
