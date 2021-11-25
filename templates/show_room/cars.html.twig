@@ -1,36 +1,37 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Vitrine Voiture{% endblock %}
 
 {% block body %}
-<div class="container">
-<div class="row">
-{% for car in cars %}
-{# {{dump(car)}} #}
+  <div class="container">
+    <div class="row">
+        {% for car in cars %}
+            {# mes sets #}
+          {% set url = path('showCar',{slug:car.slug}) %}
+            {# {{dump(car)}} #}
 
-<div class="col-sm-12 col-lg-6 col-xl-4  mt-3 mb-1">
-<div class="card mb-3 cardInfo shadow">
-  <h3 class="card-header title">{{car.mark.nameMark}} {{car.model}}</h3>
-  <div class="card-body">
-    <h5 class="card-title">{{car.yearOfEntry | date("d/m/Y")}}</h5>
-    <h4 class="card-subtitle text-muted">{{car.km | number_format(0,'','.')}} km</h4>
-  </div>
-  <a class="imgLink" href="#"> <img class="imgCard m-0 p-0" src="{{car.coverImage}}" alt="voiture"> </a>
-  <div class="card-body">
-    <p class="card-text truncText text">{{car.description | raw}}</p>
-  <div class="card-footer text-muted cardPrice mb-1 mt-1 rounded-1 shadow">
-    <p>{{car.price | number_format(0,'','.')}}<span>€</span></p>
-  </div>
-    <a href="{{path('showCar',{slug:car.slug})}}" class="btn btn-warning d-block m-auto shadow btnCard">Voir la voiture</a>
-  </div>
-  <div class="card-body">
-  </div>
+              <div class="col-sm-12 col-lg-6 col-xl-4  mt-3 mb-1">
+                <div class="card mb-3 cardInfo shadow">
+                  <h3 class="card-header title">{{car.mark.nameMark}} {{car.model}}</h3>
+                  <div class="card-body">
+                    <h5 class="card-title">{{car.yearOfEntry | date("d/m/Y")}}</h5>
+                    <h4 class="card-subtitle text-muted">{{car.km | number_format(0,'','.')}} km</h4>
+                  </div>
+                  <a class="imgLink" href="{{url}}"> <img class="imgCard m-0 p-0" src="{{car.coverImage}}" alt="voiture"> </a>
+                  <div class="card-body">
+                    <p class="card-text truncText text">{{car.description | raw}}</p>
+                    <div class="card-footer text-muted cardPrice mb-1 mt-1 rounded-1 shadow">
+                      <p>{{car.price | number_format(0,'','.')}}<span>€</span></p>
+                    </div>
+                    <a href="{{path('showCar',{slug:car.slug})}}" class="btn btn-warning d-block m-auto shadow btnCard">Voir la voiture</a>
+                  </div>
+                </div>
+            </div>
+      {% endfor %}
+    </div>
 </div>
-</div>
-{% endfor %}
-</div>
-</div>
-  {% block javascripts %}
+{% block javascripts %}
   <script src="/javascript/truncateText.js"></script>
   {% endblock %}
 {% endblock %}

@@ -38,12 +38,16 @@ class ShowRoomController extends AbstractController
      * @return Response
      */
     public function addCar(Request $request,EntityManagerInterface $manager){
-        $form = $this->createForm(AddCarType::class);
+        $cars = new Car();
+        $form = $this->createForm(AddCarType::class,$cars);
         $form->handleRequest($request);
-
+        // $cars->SetSlug('');
+        
         if($form->isSubmitted() && $form->isValid()){
+           //dd($form->getData());
             $manager->persist($cars);
             $manager->flush();
+
             $this->addFlash('success',
             'la voiture à bien été ajoutée');
         }

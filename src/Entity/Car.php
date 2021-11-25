@@ -10,9 +10,17 @@ use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 /**
  * @ORM\Entity(repositoryClass=CarRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Car
 {
@@ -30,26 +38,39 @@ class Car
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min=5,
+     *      max=90,
+     *      minMessage="Veuillez insérer au minumum {{ limit }} caractère",
+     *      maxMessage="Vous avez dépassé la limite de caractère qui est de {{ limit }}"
+     * )
+     * 
      */
     private $km;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\PositiveOrZero
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\PositiveOrZero
      */
     private $numberOwners;
 
     /**
      * @ORM\Column(type="string", length=120)
+     * @Assert\Positive
      */
     private $enginesize;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Type("datetime")
+     * 
      */
     private $yearOfEntry;
 
@@ -80,7 +101,6 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @ORM\HasLifecycleCallbacks()
      */
     private $slug;
 
@@ -105,12 +125,12 @@ class Car
      * 
      * @ORM\PrePersist
      * @ORM\PreUpdate
-     * @return 
+     *  
      */
     public function autoSlug(){
-        if(empty($this->$slug)){
+        if(empty($this->slug)){
         $slugify = new Slugify();
-         $this->$slug = $slugify->slugify($this->model.''.uniqid('id',false));
+         $this->slug = $slugify->slugify($this->model.''.uniqid());
         }
     }
 

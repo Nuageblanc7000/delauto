@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Car;
 use App\Entity\Mark;
-use Symfony\Component\Form\AbstractType;
+use App\Form\getConfigFormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,27 +15,28 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class AddCarType extends AbstractType
+class AddCarType extends getConfigFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('model',TextType::class)
-            ->add('km',IntegerType::class)
-            ->add('price',MoneyType::class)
-            ->add('numberOwners',IntegerType::class)
-            ->add('enginesize',IntegerType::class)
-            ->add('yearOfEntry',DateType::class)
-            ->add('fuel',TextType::class)
-            ->add('transmission',TextType::class)
-            ->add('description',TextareaType::class)
-            ->add('options',TextType::class)
-            ->add('coverImage',UrlType::class)
-            ->add('powerEngine',IntegerType::class)
-            ->add('mark',EntityType::class,[
+            ->add('model',TextType::class,$this->getConfig('Model:','entrer votre model'))
+            ->add('mark',EntityType::class,$this->getConfig('Marques:', false,
+            [
                 'class' => Mark::class,
                 'choice_label' => 'nameMark'
-            ])
+                ]))
+            ->add('km',IntegerType::class,$this->getConfig('Kilométrage:','entrer les km de votre voiture'))
+            ->add('price',MoneyType::class,$this->getConfig('Prix:','Entrer votre prix'))
+            ->add('fuel',TextType::class,$this->getConfig('Carburant:','diesel'))
+            ->add('yearOfEntry',DateType::class,$this->getConfig('Année d\'immatricalution:',false))
+            ->add('numberOwners',IntegerType::class,$this->getConfig('Nombre(s) de propriétaire(s):','5'))
+            ->add('enginesize',IntegerType::class,$this->getConfig('Cylindrée','1000'))
+            ->add('powerEngine',IntegerType::class,$this->getConfig('Puissance moteur:', '1000'))
+            ->add('transmission',TextType::class,$this->getConfig('Transmission:','automatique'))
+            ->add('description',TextareaType::class,$this->getConfig('Description:','Ma voiture...'))
+            ->add('options',TextType::class,$this->getConfig('Option(s):','gps,volant-chauffant...'))
+            ->add('coverImage',UrlType::class,$this->getConfig('Image-Couverture:','https://picsum.photos/200/300'))
         ;
     }
 

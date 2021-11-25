@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme myForm 'bootstrap_5_layout.html.twig' %}
 {% block body %}
+<div class="container mt-3">
+<div class="row shadow ">
 {{form_start(myForm)}}
+{{form_widget(myForm)}}
+
+<button class="btn btn-warning shadow mt-1 mb-1" type="submit">Ajouter</button>
 {{form_end(myForm)}}
+</div>
+</div>
 {% endblock %}
