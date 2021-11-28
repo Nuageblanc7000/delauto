@@ -23,9 +23,6 @@ class AddCarType extends getConfigFormType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('slug',TextType::class,[
-                'required' => false
-            ])
             ->add('model',TextType::class,$this->getConfig('Model:','entrer votre model'))
             ->add('mark',EntityType::class,$this->getConfig('Marques:', false,
             [

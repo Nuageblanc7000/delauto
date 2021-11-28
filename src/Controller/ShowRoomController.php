@@ -79,6 +79,7 @@ class ShowRoomController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid())
         {
+            $car->getSlug('');
             foreach($car->getImages() as $image)
             {
                 $image->setCar($car);
@@ -102,6 +103,25 @@ class ShowRoomController extends AbstractController
         'car' => $car,
         'myForm' => $form->createView()
     ]);
+}
+
+/**
+ * permet la suppression d'une annonce de voiture
+ *@Route("/show/{slug}/delete",name="delete_car")
+ * @param Request $request
+ * @param EntityInterfaceManager $manager
+ * @param Car $car
+ * @return Reponse
+ */
+public function deleteCar(EntityManagerInterface $manager,Car $car){
+    
+    $this->addFlash('success',
+    "votre annonce {$car->getSlug()}"
+    );
+    $manager->remove($car);
+    $manager->flush();
+    
+   return $this->redirectToRoute('showroom');
 }
 
 /**

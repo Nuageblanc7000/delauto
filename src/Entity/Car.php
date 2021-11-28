@@ -111,7 +111,7 @@ class Car
     private $powerEngine;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="car")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="car", orphanRemoval=true)
      * @Assert\Valid()
      */
     private $images;

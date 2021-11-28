@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{#set url de mes slug#}
+  {% set edit = path('edit_car',{'slug':car.slug}) %}
+    {% set delete  =  path('delete_car',{'slug':car.slug}) %}
+
 <div class="container-fluid p-0 m-0 ">
   <div class="col-12 carrouselShowCar shadow-lg ">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -30,7 +34,8 @@
       <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
       <p>{{car.price |format_currency('EUR', locale='fr')}}
         <button class="d-block btn btn-light shadow">Réserver</button>
-        <a href="{{path('edit_car',{'slug':car.slug})}}" class="btn btn-warning">Edit</a>
+        <a href="{{edit}}" class="btn btn-warning">Edit</a>
+        <a href="{{delete}}" class="btn btn-danger">supprimer</a>
         
       </p>
     </div>
