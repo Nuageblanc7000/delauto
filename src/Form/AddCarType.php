@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Car;
 use App\Entity\Mark;
+use App\Form\ImageType;
 use App\Form\getConfigFormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,6 +23,9 @@ class AddCarType extends getConfigFormType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('slug',TextType::class,[
+                'required' => false
+            ])
             ->add('model',TextType::class,$this->getConfig('Model:','entrer votre model'))
             ->add('mark',EntityType::class,$this->getConfig('Marques:', false,
             [
@@ -55,8 +59,8 @@ class AddCarType extends getConfigFormType
         
             ->add('images',CollectionType::class,[
                 'entry_type' => ImageType::class,
+                'allow_delete' => true,
                 'allow_add' => true,
-                'allow_delete' => true
 
             ])
         ;

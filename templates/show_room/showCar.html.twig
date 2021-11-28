@@ -30,6 +30,8 @@
       <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
       <p>{{car.price |format_currency('EUR', locale='fr')}}
         <button class="d-block btn btn-light shadow">Réserver</button>
+        <a href="{{path('edit_car',{'slug':car.slug})}}" class="btn btn-warning">Edit</a>
+        
       </p>
     </div>
   </div>

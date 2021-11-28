@@ -10,12 +10,14 @@ use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 /**
@@ -94,12 +96,12 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $coverImage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
      */
     private $slug;
 
@@ -110,6 +112,7 @@ class Car
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="car")
+     * @Assert\Valid()
      */
     private $images;
 
@@ -118,24 +121,25 @@ class Car
      * @ORM\JoinColumn(nullable=false)
      */
     private $mark;
-
-    /**
-     * slug automatique si il est vide
-     * 
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     *  
-     */
-    public function autoSlug(){
-        if(empty($this->slug)){
-        $slugify = new Slugify();
-         $this->slug = $slugify->slugify($this->model.''.uniqid('id',false));
-        }
-    }
-
+    
     public function __construct()
     {
         $this->images = new ArrayCollection();
+    }
+    
+
+        /**
+         * slug automatique si il est vide
+         * @ORM\PrePersist
+         * @ORM\PreUpdate
+         * 
+         * @return void
+         */
+    public function autoSlug(){
+        if(empty($this->slug)){
+        $slugify = new Slugify();
+         $this->slug = $slugify->slugify($this->model.' '.uniqid('id',false));
+        }
     }
     
     public function getId(): ?int

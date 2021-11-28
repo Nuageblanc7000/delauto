@@ -8,7 +8,7 @@
     <div class="row">
         {% for car in cars %}
             {# mes sets #}
-          {% set url = path('showCar',{slug:car.slug}) %}
+          {% set url = path('showCar',{'slug':car.slug}) %}
             {# {{dump(car)}} #}
 
               <div class="col-sm-12 col-lg-6 col-xl-4  mt-3 mb-1">

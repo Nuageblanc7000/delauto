@@ -1,12 +1,12 @@
-{% extends 'base.html.twig' %}
-{% block title %} Ajouter une voiture {% endblock %}
+{% extends "base.html.twig" %}
+{% block title %} modifier voiture {% endblock %}
 {% form_theme myForm 'show_room/_collectionImg.html.twig' %}
 {% block body %}
     <div class="container mt-3">
     <div class="row shadow ">
     {{form_start(myForm)}}
         {{form_widget(myForm)}}
-        <button class="btn btn-warning shadow mt-1 mb-1" type="submit">Ajouter</button>
+        <button class="btn btn-warning shadow mt-1 mb-1" type="submit">Update</button>
     {{form_end(myForm)}}
 </div>
 </div>

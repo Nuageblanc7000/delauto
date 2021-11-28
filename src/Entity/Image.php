@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ImageRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Url;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
@@ -19,11 +21,13 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $nameImg;
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Assert\Length(min=5, minMessage="Veuillez insérer au minimum {{ limit }}")
      */
     private $caption;
 
