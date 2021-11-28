@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Image;
 use App\Form\AddCarType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,12 +40,16 @@ class ShowRoomController extends AbstractController
      */
     public function addCar(Request $request,EntityManagerInterface $manager){
         $cars = new Car();
+
         $form = $this->createForm(AddCarType::class,$cars);
         $form->handleRequest($request);
-        // $cars->SetSlug('');
         
         if($form->isSubmitted() && $form->isValid()){
-           //dd($form->getData());
+         
+            foreach ($cars->getImages() as $image) {
+                $image->setCar($cars);
+                $manager->persist($image);
+            }
             $manager->persist($cars);
             $manager->flush();
 
@@ -63,6 +68,7 @@ class ShowRoomController extends AbstractController
      * permet d'afficher une voiture (param converter)
      * 
      * @Route("/show/{slug}",name="showCar")
+     * 
      * @param Car $car
      * @return response
      */

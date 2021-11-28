@@ -1,13 +1,49 @@
 {% extends 'base.html.twig' %}
-{% form_theme myForm 'bootstrap_5_layout.html.twig' %}
+{% block title %} Ajouter une voiture {% endblock %}
+{% form_theme myForm _self %}
 {% block body %}
-<div class="container mt-3">
-<div class="row shadow ">
-{{form_start(myForm)}}
-{{form_widget(myForm)}}
+    <div class="container mt-3">
+    <div class="row shadow ">
+    {{form_start(myForm)}}
+        {{form_widget(myForm)}}
+        <button class="btn btn-warning shadow mt-1 mb-1" type="submit">Ajouter</button>
+    {{form_end(myForm)}}
+</div>
+</div>
+{% endblock %}
 
-<button class="btn btn-warning shadow mt-1 mb-1" type="submit">Ajouter</button>
-{{form_end(myForm)}}
-</div>
-</div>
+{% block _add_car_images_widget %}
+    {{form_widget(form)}}
+    <input type="hidden" id="counter-w" value="0">
+    <div class="form-group">
+      <button type="button" id="add-image" class="btn btn-primary shadow">
+        Ajouter une image
+      </button>
+    </div>
+{% endblock %}
+
+{% block _add_car_images_entry_row %}
+    {#enleve l'affichage des zéros par défault et affiche mes widgets défini #}
+    {{form_widget(form)}}
+{% endblock %}
+
+{% block _add_car_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+    <div class="row">
+        <div class="col ">
+            {{ form_widget(form.nameImg) }}
+        </div>
+        <div class="col">
+            {{ form_widget(form.caption) }}
+        </div>        
+    <div class="col-2">
+            <button type="button" class="btn btn-danger rounded" data-action="delete" data-target="#block_{{ id }}">x</button>
+    </div>
+    </div>
+    {# {{ dump(form) }} #}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+<script src="/javascript/addCar.js"></script>
 {% endblock %}

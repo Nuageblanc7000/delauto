@@ -11,15 +11,21 @@
     </head>
     <body>
     {% include "partials/header.html.twig" %}
+    {#{message flash permettant de vérifier à l'envoi de mes formulaire si tout c'est bien passé}#}
+        {% for label, messages in app.flashes %}
+            <div class="container">
+                <div class="alert alert-{{ label }} shadow mt-2 mb-2 rounded-2">
+                    {% for message in messages %}
+                        <p>{{ message | raw }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+    {% endfor %}
         {% block body %}
-        
         {% endblock %}
          {% include "partials/footer.html.twig" %}
         {% block javascripts %}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-             {% if controller_name is defined  and controller_name  == 'HomeController' %}
-        <script src="javascript/menuColor.js"></script>
-        {% endif %}
         {% endblock %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

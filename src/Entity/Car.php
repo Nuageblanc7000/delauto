@@ -33,19 +33,13 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank
      */
     private $model;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank
-     * @Assert\Length(
-     *      min=5,
-     *      max=90,
-     *      minMessage="Veuillez insérer au minumum {{ limit }} caractère",
-     *      maxMessage="Vous avez dépassé la limite de caractère qui est de {{ limit }}"
-     * )
-     * 
      */
     private $km;
 
@@ -86,6 +80,10 @@ class Car
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *      min=20,
+     *      minMessage="Veuillez insérer au minumum {{ limit }} caractère"
+     * )
      */
     private $description;
 
@@ -101,6 +99,7 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $slug;
 
@@ -130,7 +129,7 @@ class Car
     public function autoSlug(){
         if(empty($this->slug)){
         $slugify = new Slugify();
-         $this->slug = $slugify->slugify($this->model.''.uniqid());
+         $this->slug = $slugify->slugify($this->model.''.uniqid('id',false));
         }
     }
 

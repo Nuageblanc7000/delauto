@@ -9,19 +9,20 @@
       {% for img in car.images %}
 
         {# on donne une condition pour que seul la première image reçoit la classe active #}
+        
         <div class="carousel-item {% if loop.first %}active{% endif %}">
-        <img src="{{img.nameImg}}" class="d-block w-100" alt="{{img.caption}}">
+          <img src="{{img.nameImg}}" class="d-block w-100" alt="{{img.caption}}">
         </div>
-        {% endfor %}
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
-      </button>
+    </button>
   </div>
   
   <div class="viewInfo d-flex justify-content-around align-items-center shadow"> 
