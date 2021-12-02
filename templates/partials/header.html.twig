@@ -17,9 +17,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{path('showroom')}}">Nos voitures</a>
         </li>
+        {# une condition pour vérfier si un user est connecté et si il est admin alors il peut voir l'ajout d'annonce de voiture#}
+        {% if app.user and app.user.roles[0] =="ROLE_ADMIN" %}
         <li class="nav-item">
           <a class="nav-link" href=" {{path('addCar')}} ">Ajouter une voiture</a>
         </li>   
+        {% endif %}
       </ul>
       <form class="d-flex">
         <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
@@ -28,7 +31,7 @@
          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         {% if app.user %}
         <li class="nav-item">
-        <a class="nav-link" href="{{path('inscription_user')}}">Déconnexion</a>
+        <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
         </li>
          <li class="nav-item">
         <a class="nav-link" href="#">Profile</a>
@@ -36,6 +39,9 @@
         {% else %}
           <li class="nav-item">
           <a class="nav-link" href="{{path('inscription_user')}}">Inscription</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{path('login')}}">Connection</a>
           </li>
         {% endif %}
         </ul>
