@@ -30,11 +30,9 @@ class UserController extends AbstractController
        $user = new User();
        $form = $this->createForm(UserType::class,$user);
        $form->handleRequest($request);
-
+       
        if($form->isSubmitted() && $form->isValid()){
-           if(empty($user->picture)){
-            $user->defaultPicture();
-           }
+ 
           $password = $user->getPassword();
            $user->setPassword($hasher->hashPassword($user,$password));
            $manager->persist($user);

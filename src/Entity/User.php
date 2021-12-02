@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity("email")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -79,7 +80,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * )
      */
     private $picture;
-
+    
+    /**
+     * création d'une picture par défaut
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     */
+    public function setDefaultPicture(){
+        if(empty($this->picture)){
+         $this->picture = 'https://place-hold.it/80x80';
+        }
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -95,17 +108,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
-    }
-    /**
-     * création d'une picture par défaut
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     * 
-     */
-    public function defaultPicture(){
-        if(empty($this->picture)){
-        $this->picture = 'https://place-hold.it/50x50';
-        }
     }
 
     /**

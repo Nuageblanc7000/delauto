@@ -16,6 +16,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+      #possibilité d'utiliser ma method getConfigFormType mais pour changer je passe par la base#
         $builder
         ->add('lastname',TextType::class,[
             'label'=>'Nom:',

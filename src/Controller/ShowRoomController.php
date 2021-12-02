@@ -17,7 +17,6 @@ class ShowRoomController extends AbstractController
 {
     /**
      * Permet d'afficher toutes mes voitures
-     * 
      * @Route("/show", name="showroom")
      * @return Response
      */
@@ -49,7 +48,6 @@ class ShowRoomController extends AbstractController
                 $image->setCar($car);
                 $manager->persist($image);
             }
-
             $manager->persist($car);
             $manager->flush();
 
@@ -109,7 +107,8 @@ class ShowRoomController extends AbstractController
 
 /**
  * permet la suppression d'une annonce de voiture
- *@Route("/show/{slug}/delete",name="delete_car")
+ * @Route("/show/{slug}/delete",name="delete_car")
+ * @IsGranted("ROLE_ADMIN",message="Vous n'avez pas accès à cette partie")
  * @param Request $request
  * @param EntityInterfaceManager $manager
  * @param Car $car

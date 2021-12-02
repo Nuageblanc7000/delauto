@@ -229,3 +229,22 @@ font-size: 1.3rem !important;
     background-size: cover;
     background-position:center center;
 }
+
+/*form login */
+.connection{
+    font-family: var(--fontText);
+}
+.connection form input{
+    background-color: rgba(218, 165, 32, 0.459);
+    outline: none;
+}
+.connection form input:focus{ 
+border:none !important;
+}
+.connection h1{
+font-family: var(--fontTitle);
+}
+.btn-gold{
+background-color: goldenrod !important;
+color: white !important; 
+}
