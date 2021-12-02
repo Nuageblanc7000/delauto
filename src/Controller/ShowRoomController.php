@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShowRoomController extends AbstractController
@@ -67,6 +68,7 @@ class ShowRoomController extends AbstractController
     /**
      * permet la modification d'une annonce de voiture (paramConverter)
      * @Route("/show/{slug}/edit",name="edit_car")
+     * @IsGranted("ROLE_ADMIN",message="Vous n'avez pas accès à cette partie")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param Car $car

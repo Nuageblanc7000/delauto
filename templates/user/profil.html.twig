@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container-fluid p-0 min-vh-100">
+<div class="container shadow position-relative">
+<div class="row">
+<div class="profil-fond"></div>
+<div class="col-6 m-auto d-flex justify-content-center align-items-center flex-column profil-picture">
+  <div class="rounded-circle shadow profil-img">
+ <img class="rounded-circle" src="{{user.picture}}" alt="photo-profil">
+  </div>  
+<h1>Bienvenu <strong>{{user.getFullName}}</strong></h1>
+</div>
+</div>
+
+</div>
+</div>
+{% endblock %}

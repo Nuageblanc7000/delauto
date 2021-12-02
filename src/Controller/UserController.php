@@ -32,6 +32,9 @@ class UserController extends AbstractController
        $form->handleRequest($request);
 
        if($form->isSubmitted() && $form->isValid()){
+           if(empty($user->picture)){
+            $user->defaultPicture();
+           }
           $password = $user->getPassword();
            $user->setPassword($hasher->hashPassword($user,$password));
            $manager->persist($user);
@@ -45,19 +48,18 @@ class UserController extends AbstractController
             'userForm' => $form->createView()
         ]);
     }
-    // /**
-    //  * Permet à l'user de se connecter
-    //  * @Route("/connection",name="connection_user")
-    //  * @param Request $request
-    //  * @param User $user
-    //  * @return void
-    //  */
-    // public function connection(Request $request,UserInterface $user){
-    //     $form= $this->createForm(ConnectionType::class,$user);
-    //     $form->handleRequest($request);
 
-    //     return $this->render('user/connection.html.twig',[
-    //         'loginForm' => $form
-    //     ]);
-    // }
+
+    /**
+     * afficher le profil du user en cours
+     * @Route("/profil",name="profil_user")
+     * @return Response
+     */
+    public function userProfil(){
+     $user =  $this->getUser();
+
+     return $this->render('user/profil.html.twig',[
+         'user' => $user
+     ]);
+    }
 }

@@ -7,11 +7,18 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\PreUpdate;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -24,6 +31,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message= "cette adresse n'est pas valide {{ value }}"
+     * )
      */
     private $email;
 
@@ -35,21 +45,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *  min=10,
+     *  minMessage = "Veuillez introduire un mot de passe de minimum {{ limit }}"
+     * )
+     * 
+     * 
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type(
+     *      type="string",
+     *      message = "votre nom ne peut pas comporter de chiffre"
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type(
+     *      type="string",
+     *      message = "votre nom ne peut pas comporter de chiffre"
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *  message="veuillez insérer une url"
+     * )
      */
     private $picture;
 
@@ -75,12 +102,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\PreUpdate
      * 
      */
-    private function defaultPicture(){
+    public function defaultPicture(){
         if(empty($this->picture)){
-        $this->setPicture('https://place-hold.it/50x50');
+        $this->picture = 'https://place-hold.it/50x50';
         }
     }
 
+    /**
+     * permet la récupération du nom et prénom
+     *
+     * @return string
+     */
+    public function getFullName(){ 
+        return $this->getFirstname().' '.$this->getLastname();  
+    }
     /**
      * A visual identifier that represents this user.
      *

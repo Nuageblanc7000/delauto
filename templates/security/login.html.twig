@@ -8,7 +8,7 @@
 <div class="col-12 col-sm-8 col-lg-6 col-xl-6 shadow">
 <form method="post" class="p-4">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger shadow">Mot de passe ou email invalide</div>
     {% endif %}
 
     {% if app.user %}
