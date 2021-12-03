@@ -135,7 +135,7 @@ class Car
          * 
          * @return void
          */
-    private function autoSlug(){
+    public function autoSlug(){
         if(empty($this->slug)){
         $slugify = new Slugify();
          $this->slug = $slugify->slugify($this->model.' '.uniqid('id',false));

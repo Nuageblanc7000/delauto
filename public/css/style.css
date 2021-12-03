@@ -239,7 +239,7 @@ font-size: 1.3rem !important;
     outline: none;
 }
 .connection form input:focus{ 
-border:none !important;
+    border:none !important;
 }
 .connection h1{
 font-family: var(--fontTitle);
@@ -247,4 +247,18 @@ font-family: var(--fontTitle);
 .btn-gold{
 background-color: goldenrod !important;
 color: white !important; 
+}
+
+/*page error*/
+
+.error-img{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.btn-error{
+    width:200px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
 }

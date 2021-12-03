@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container pt-3 pb-3 min-vh-75 ">
+<div class="row d-flex align-items-center justify-content-around flex-column h-100">
+
+<h2 class="text-center mt-3 mb-3 fs-1">Cette page n'existe (plus) ou pas</h2>
+<img class="error-img" src="https://c4d709dd302a2586107d-f8305d22c3db1fdd6f8607b49e47a10c.ssl.cf1.rackcdn.com/thumbnails/stock-images/fca26b48de5bfc02c7185fae14e649a5.png" alt="voiture">
+
+Nous vous invitons à retourner vers notre page d'accueil. <a class="btn btn-gold btn-error d-block mt-2 mb-2" href="{{path('homepage')}}">Accueil</a>
+
+</div>
+</div>
+{% endblock %}
