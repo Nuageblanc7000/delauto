@@ -141,6 +141,14 @@ class Car
          $this->slug = $slugify->slugify($this->model.' '.uniqid('id',false));
         }
     }
+    /**
+     * permet d'obtenir un tableau mappable (voir dans twig showCar)
+     *
+     * @return Array
+     */
+    public function GetExplodeString(){
+        return explode(',',$this->getOptions());
+    }
     
     public function getId(): ?int
     {

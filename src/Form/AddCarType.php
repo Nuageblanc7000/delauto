@@ -35,7 +35,8 @@ class AddCarType extends getConfigFormType
                'choices' =>[
                    'Diesel' => 'diesel',
                    'Essence' => 'essence',
-                   'LPG' => 'LPG'
+                   'LPG' => 'LPG',
+                   'Electrique' => 'électrique'
                ]
             ]))
             ->add('yearOfEntry',DateType::class,$this->getConfig('Année d\'immatricalution:',false,[

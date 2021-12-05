@@ -52,6 +52,9 @@ video{
     background: #000;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.404);
 }
+.nav-home form input,.nav-home form button{
+    border-radius: 10px;
+}
 .downHome{
     color:white;
     right: 0;
@@ -228,6 +231,25 @@ font-size: 1.3rem !important;
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center center;
+}
+.profil-onglet{
+    height: 80px;
+    padding:4px;
+
+}
+.profil-onglet  .profil-onglet-btn{
+    width:40px !important;
+    height: 50px !important;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.profil-onglet  .profil-onglet-btn i{
+    width: auto;
+    font-size: 20px;
+    color: white;
 }
 
 /*form login */

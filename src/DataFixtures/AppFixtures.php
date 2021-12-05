@@ -6,10 +6,12 @@ use DateInterval;
 use Faker\Factory;
 use App\Entity\Car;
 use App\Entity\Mark;
+use App\Entity\User;
 use App\Entity\Image;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 
@@ -35,11 +37,48 @@ class AppFixtures extends Fixture
      * @param ObjectManager $manager (ancienne méthode maintenant managerEntityInterface)
      * @return void
      */
+    //obligation de passer pa le constructeur car sinon ça rendre en conflit si je l'injecte directement dans  la function load
+    private $hasher;
+    public function __construct(UserPasswordHasherInterface $hasher){
+        $this->hasher=$hasher;
+    }
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
         $slugify= new Slugify();
-        // creation des différents tableaux.
+
+        // j'aurais aussi besoin de deux user un normal et un en mode pro
+        // pour ça je vais devoir faire appel à mon Entity User à fin de pouvoir créer un nouveau user.
+        // j'instancie mon user(ne pas oublier d'importer)
+        $jordan = new User();
+        $password ="test";
+        // j'ai maintenant accès au différent setter et getter qui compose mon objet User
+        $jordan->setFirstname('Jordan')
+             ->setLastname('Boderio')
+             ->setRoles(["ROLE_ADMIN"])
+             ->setEmail('boderio@gmail.com')
+             ->setPicture('https://pbs.twimg.com/profile_images/378800000461430035/e224ebb1a9f9c0682d66de19463690db_400x400.jpeg');
+             //pour le password on doit appeller l'interface User hasher qui nous permettra d'obtenir un mot de passe sécurisé.
+             // il faudra changer le mot de passe car l'afficher en clair c'est pas top.
+        
+        $jordan->setPassword($this->hasher->hashPassword($jordan,$password));
+        $manager->persist($jordan);
+
+        // création du user simple pour les tests.
+        
+        $remy = new User();
+        $remy->setFirstname('Rémy')
+             ->setLastname('Wetterene')
+             ->setEmail('wetterene.remy@gmail.com')
+            //pas besoin d'initialiser un role de base symfony donne le role user à tout les utilisateurs(enregistré)
+             ->setPicture('https://popsockets.co.za/wp-content/uploads/2018/06/IronManIcon_front.png')
+             ->setPassword($this->hasher->hashPassword($remy,$password));
+        $manager->persist($remy);
+
+
+        
+
+        // creation des différents tableaux qui vont me servir pour créer mes fixtures.
 
         $carburant = ['diesel','essence'];
         $tranmission = ['automatique','manuel'];

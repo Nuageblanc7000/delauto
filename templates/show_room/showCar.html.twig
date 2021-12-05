@@ -28,46 +28,52 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <div class="container shadow h-auto p-0">
+    <div class="viewInfo d-flex justify-content-around align-items-center shadow"> 
+      <div class="container d-flex justify-content-around align-items-center">
+        <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
+        <p>{{car.price |format_currency('EUR', locale='fr')}}
+        </p>
+        <div class="d-flex">
+          <button class="d-block btn btn-primary shadow">Réserver</button>
+          {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+          <a href="{{edit}}" class="btn btn-warning ms-1 shadow">Edit</a>
+          <a href="{{delete}}" class="btn btn-danger ms-1 shadow">supprimer</a>
+          {% endif %}
+        </div>
+          
+      </div>
+    </div>
+    <div class=" container-lg viewInfo infoCars w-100 d-flex  h-auto"> 
+      
+        <div class="row  justify-content-around align-items-center p-2 h-auto">
+          <div class="">
+            <p class="btn btn-light shadow rounded">Première immatriculation:  <span>{{car.yearOfEntry | date("d/m/Y")}}</span></p>
+            <p class="btn btn-light shadow rounded">Kilométrage:  <span>{{car.km}} km</span></p>
+            <p class="btn btn-light shadow rounded">Nombre(s) de propriétaires(s):<span>{{car.NumberOwners}}</span></p>
+          </div>
+          <div class="">
+            <p class="btn btn-light shadow rounded">Cylindrée:  <span>{{car.engineSize}} CC</span></p>
+            <p class="btn btn-light shadow rounded">Puissance:  <span>{{car.powerEngine}} CH</span></p>
+            <p class="btn btn-light shadow rounded">Transmission:  <span>{{car.Transmission}}</span></p>
+            <p class="btn btn-light shadow rounded">Carburant: <span>{{car.fuel}}</span></p>
+          </div>
+    
+      </div>
+    </div>
+
+    <div class="descr container  mt-2 p-0">
+    <h2 class="">Description:</h2>
+      <p>{{car.description}}</p>
+    </div>
+
+    <div class="descr container  mt-2 p-0">
+      <h2 class="">Options:</h2>
+      {% for option in car.GetExplodeString  %}
+      <span class="btn shadow rounded-1 btn-gold fw-bold mb-2">{{option}}</span>
+      {% endfor %}
   
-  <div class="viewInfo d-flex justify-content-around align-items-center shadow"> 
-    <div class="container d-flex justify-content-around align-items-center">
-      <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
-      <p>{{car.price |format_currency('EUR', locale='fr')}}
-        <button class="d-block btn btn-light shadow">Réserver</button>
-        {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
-        <a href="{{edit}}" class="btn btn-warning">Edit</a>
-        <a href="{{delete}}" class="btn btn-danger">supprimer</a>
-        {% endif %}
-        
-      </p>
     </div>
-  </div>
-  <div class="viewInfo infoCars w-100 d-flex shadow h-auto"> 
-    <div class="container-fluid  w-100">
-      <div class="row justify-content-center">
-        <div class=" col-12 col-sm-6 col-lg-4 col-xl-3 mt-3">
-          <p>Première immatriculation:  <span>{{car.yearOfEntry | date("d/m/Y")}}</span></p>
-          <p>Kilométrage:  <span>{{car.km}} km</span></p>
-          <p>Nombre(s) de propriétaires(s):<span>{{car.NumberOwners}}</span></p>
-        </div>
-        <div class="col-12 col-sm-4 col-lg-3 col-xl-3 mt-3">
-          <p>Cylindrée:  <span>{{car.engineSize}} CC</span></p>
-          <p>Puissance:  <span>{{car.powerEngine}} CH</span></p>
-          <p>Transmission:  <span>{{car.Transmission}}</span></p>
-          <p>Carburant: <span>{{car.fuel}}</span></p>
-        </div>
-    </div>
-    </div>
-  </div>
-
-  <div class="descr container shadow mt-2">
-  <h2 class="">Description:</h2>
-    <p>{{car.description}}</p>
-  </div>
-
-  <div class="descr container shadow mt-2">
-  <h2 class="">Options:</h2>
-    <p>{{car.options}}</p>
   </div>
 
 </div>

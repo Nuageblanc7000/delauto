@@ -93,6 +93,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
     
+    public function getOldPassword(){
+        return $this->getPassword();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Acme\DemoBundle\Form\DataTransformer\StringToArrayTransformer;
 
 class ShowRoomController extends AbstractController
 {
@@ -43,11 +44,11 @@ class ShowRoomController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-         
             foreach ($car->getImages() as $image) {
                 $image->setCar($car);
                 $manager->persist($image);
             }
+            
             $manager->persist($car);
             $manager->flush();
 
