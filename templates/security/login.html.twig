@@ -26,7 +26,6 @@
         <label for="inputPassword">Mot de passe:</label>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
     </div>
-    {# {{dump(csrf_token('authenticate'))}} #}
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >

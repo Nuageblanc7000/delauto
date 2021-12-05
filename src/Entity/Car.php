@@ -35,31 +35,49 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=150)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *   message="veuillez compléter le champ"
+     * )
      */
     private $model;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank
+     * @Assert\NotBlank(
+     *     message="veuillez compléter le champ"
+     * )
+     * 
      */
     private $km;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(
+     *     message="veuillez compléter le champ"
+     * )
      * @Assert\PositiveOrZero
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\PositiveOrZero
+     * @Assert\PositiveOrZero(
+     *     message="veuillez introduire une valeur positive ou zéro"
+     * )
+     * @Assert\NotBlank(
+     *     message="veuillez introduire une valeur"
+     * )
      */
     private $numberOwners;
 
     /**
      * @ORM\Column(type="string", length=120)
-     * @Assert\Positive
+     * @Assert\Positive(
+     *  message="veuillez insérer un chiffre supérieur à zéro exemple 1500"
+     * )
+     * @Assert\NotBlank(
+     *    message="veuillez introduire une valeur"
+     * )
      */
     private $enginesize;
 
@@ -72,6 +90,7 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=150)
+     * 
      */
     private $fuel;
 
@@ -96,7 +115,8 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
+     * @Assert\NotBlank
+     * @Assert\Url(message="veuillez insérer une url correcte")
      */
     private $coverImage;
 
@@ -107,6 +127,8 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=160)
+     * @Assert\NotBlank
+     * 
      */
     private $powerEngine;
 

@@ -18,7 +18,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email")
+ * @UniqueEntity(
+ * fields = {"email","email"},
+ * message="cette adresse est déjà utilisée")
  * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -80,6 +82,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * )
      */
     private $picture;
+
+   // public $oldPassword;
     
     /**
      * création d'une picture par défaut
@@ -93,9 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
     
-    public function getOldPassword(){
-        return $this->getPassword();
-    }
+
 
     public function getId(): ?int
     {
@@ -173,7 +175,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.

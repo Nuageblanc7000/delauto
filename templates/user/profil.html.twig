@@ -10,11 +10,10 @@
                 <img class="rounded-circle" src="{{user.picture}}" alt="photo-profil">
               </div>  
                 <h1>Bienvenu <strong>{{user.getFullName}}</strong></h1>
-
               <div class="profil-onglet d-flex justify-content-evenly w-50 align-items-center">
                 <a href="{{ path('edit_user') }}" class="shadow profil-onglet-btn btn"><i class="fas fa-marker"></i></a>
-                <a href="#" class="shadow profil-onglet-btn btn"><i class="fas fa-trash-alt"></i></a>
-                <a href="#" class="shadow profil-onglet-btn btn"><i class="fas fa-key"></i></a>
+                <a href="{{ path('del_user') }}" class="shadow profil-onglet-btn btn"><i class="fas fa-trash-alt"></i></a>
+                <a href="{{ path('updatePass_user') }}" class="shadow profil-onglet-btn btn"><i class="fas fa-key"></i></a>
               </div>
             </div>
         </div>

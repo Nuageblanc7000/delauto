@@ -4,7 +4,10 @@
 <div class="container shadow">
 {{form_start(userForm)}}
 {{form_widget(userForm)}}
-<button type="submit" class="btn btn-gold mb-2">modifier</button>
+<div class="form-group">
+<button type="submit" class="btn btn-gold mt-2 mb-2">modifier</button>
+<a href="{{ path('profil_user') }}"  class="btn btn-warning shadow mb-2 mt-2">Retour au profil</a>
+</div>
 {{form_end(userForm)}}
 </div>
 {% endblock %}
