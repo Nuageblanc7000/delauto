@@ -30,7 +30,7 @@
   </div>
   <div class="container shadow h-auto p-0">
     <div class="viewInfo d-flex justify-content-around align-items-center shadow"> 
-      <div class="container d-flex justify-content-around align-items-center">
+      <div class="container d-flex justify-content-around align-items-center flex-wrap mb-2">
         <p>{{car.mark.nameMark | upper}} {{car.model | upper}}</p>
         <p>{{car.price |format_currency('EUR', locale='fr')}}
         </p>
@@ -46,17 +46,17 @@
     </div>
     <div class=" container-lg viewInfo infoCars w-100 d-flex  h-auto"> 
       
-        <div class="row  justify-content-around align-items-center p-2 h-auto">
-          <div class="">
-            <p class="btn btn-light shadow rounded">Première immatriculation:  <span>{{car.yearOfEntry | date("d/m/Y")}}</span></p>
-            <p class="btn btn-light shadow rounded">Kilométrage:  <span>{{car.km}} km</span></p>
-            <p class="btn btn-light shadow rounded">Nombre(s) de propriétaires(s):<span>{{car.NumberOwners}}</span></p>
+        <div class="row  justify-content-around align-items-center p-2 h-auto car-info-p">
+          <div class="d-flex justify-content-center h-auto  flex-wrap">
+            <p class="btn btn-light shadow rounded m-2">Première immatriculation:  <span>{{car.yearOfEntry | date("d/m/Y")}}</span></p>
+            <p class="btn btn-light shadow rounded  m-2">Kilométrage:  <span>{{car.km}} km</span></p>
+            <p class="btn btn-light shadow rounded  m-2">Nombre(s) de propriétaires(s):<span>{{car.NumberOwners}}</span></p>
           </div>
-          <div class="">
-            <p class="btn btn-light shadow rounded">Cylindrée:  <span>{{car.engineSize}} CC</span></p>
-            <p class="btn btn-light shadow rounded">Puissance:  <span>{{car.powerEngine}} CH</span></p>
-            <p class="btn btn-light shadow rounded">Transmission:  <span>{{car.Transmission}}</span></p>
-            <p class="btn btn-light shadow rounded">Carburant: <span>{{car.fuel}}</span></p>
+          <div class="d-flex justify-content-center flex-wrap">
+            <p class="btn btn-light shadow rounded m-2">Cylindrée:  <span>{{car.engineSize}} CC</span></p>
+            <p class="btn btn-light shadow rounded m-2">Puissance:  <span>{{car.powerEngine}} CH</span></p>
+            <p class="btn btn-light shadow rounded m-2">Transmission:  <span>{{car.Transmission}}</span></p>
+            <p class="btn btn-light shadow rounded m-2">Carburant: <span>{{car.fuel}}</span></p>
           </div>
     
       </div>

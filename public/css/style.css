@@ -185,9 +185,12 @@ object-fit: cover;
 font-family: var(--fontTitle);
 }
 .viewInfo p{
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: max-content  ;
 font-family: var(--fontTitle) !important;
+}
+.car-info-p p{
+    font-size:1rem !important;
 }
 .viewInfo.infoCars{
 background-color: goldenrod !important;
@@ -195,7 +198,7 @@ font-family: var(--fontText) !important;
 color: white;
 }
 .viewInfo.infoCars p{
-font-size: 1.3rem !important;
+font-size: 1rem !important;
 }
 .viewInfo.infoCars p span{
     display: block;
