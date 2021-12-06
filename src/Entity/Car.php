@@ -10,14 +10,15 @@ use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 /**
@@ -38,6 +39,9 @@ class Car
      * @Assert\NotBlank(
      *   message="veuillez compléter le champ"
      * )
+     * @Assert\PositiveOrZero(
+     *  message="veuillez insérer un chiffre possitive"
+     * )
      */
     private $model;
 
@@ -45,6 +49,9 @@ class Car
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(
      *     message="veuillez compléter le champ"
+     * )
+     * @Assert\PositiveOrZero(
+     *      message="veuillez ajouter un nombre"
      * )
      * 
      */
@@ -55,7 +62,9 @@ class Car
      * @Assert\NotBlank(
      *     message="veuillez compléter le champ"
      * )
-     * @Assert\PositiveOrZero
+     * @Assert\PositiveOrZero(
+     *  message="veuillez ajouter un nombre"
+     * )
      */
     private $price;
 
@@ -90,6 +99,13 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank(
+     *  message="veuillez insérer une valeur (diesel)"
+     * )
+     * @Assert\Choice(
+     *  {"diesel","essence","électrique","LPG"},
+     *  message="la valeur choisie n'existe pas"
+     * )
      * 
      */
     private $fuel;
@@ -127,8 +143,12 @@ class Car
 
     /**
      * @ORM\Column(type="string", length=160)
-     * @Assert\NotBlank
-     * 
+     * @Assert\NotBlank(
+     *      message="veuillez insérer une valeur"
+     * )
+     * @Assert\Positive(
+     *      message="veuillez insérer un chiffre supérieur à zéro exemple 180"
+     * )
      */
     private $powerEngine;
 
